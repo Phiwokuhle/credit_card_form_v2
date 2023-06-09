@@ -13,8 +13,6 @@ class ColorsConstants {
   static Color bluegray400 = fromHex('#8d849d');
   static Color whiteA700 = fromHex('#ffffff');
 
-
-
   static Color fromHex(String hexString) {
     final buffer = StringBuffer();
     if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');

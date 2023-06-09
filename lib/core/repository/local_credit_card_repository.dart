@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 
 class LocalCreditCardRepository {
   late Future<Isar> _isar;
-  LocalCreditCardRepository(){
+  LocalCreditCardRepository() {
     _isar = openLocalDB();
   }
 
@@ -15,16 +15,15 @@ class LocalCreditCardRepository {
   }
 
   Future<void> saveCreditCard(CreditCardsLocalDB creditCard) async {
-   final localDb = await _isar;
-   localDb.writeTxnSync(() => localDb.creditCardsLocalDBs.putSync(creditCard));
+    final localDb = await _isar;
+    localDb.writeTxnSync(() => localDb.creditCardsLocalDBs.putSync(creditCard));
   }
-  Future<Isar> openLocalDB()async{
+
+  Future<Isar> openLocalDB() async {
     final dir = await getApplicationDocumentsDirectory();
-    if(Isar.instanceNames.isEmpty){
-      return await Isar.open(
-          [CreditCardsLocalDBSchema],
-          inspector: true, directory: dir.path
-      );
+    if (Isar.instanceNames.isEmpty) {
+      return await Isar.open([CreditCardsLocalDBSchema],
+          inspector: true, directory: dir.path);
     }
     return Future.value(Isar.getInstance());
   }

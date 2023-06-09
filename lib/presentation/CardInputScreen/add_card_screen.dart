@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AddNewCardScreen extends HookConsumerWidget{
+class AddNewCardScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   return Scaffold(
-     backgroundColor: ColorsConstants.whiteA70063,
-     body: SafeArea(child: CreditCardForm()),
-
-   );
+    return Scaffold(
+      backgroundColor: ColorsConstants.whiteA70063,
+      body: SafeArea(child: CreditCardForm()),
+    );
   }
-
 }
