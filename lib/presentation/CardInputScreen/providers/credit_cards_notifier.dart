@@ -11,7 +11,6 @@ class CreditCardStateNotifier extends StateNotifier<List<CreditCardsLocalDB>> {
     final state = await _repository.getCreditCards();
   }
 }
-
 final creditCardsStateNotifier = StateNotifierProvider((ref) {
   return CreditCardStateNotifier();
 });

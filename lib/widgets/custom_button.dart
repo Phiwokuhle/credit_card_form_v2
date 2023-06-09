@@ -3,13 +3,14 @@ import 'package:credit_card_reader/core/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
 class CustomButton extends StatelessWidget {
   CustomButton(
       {this.shape,
       this.padding,
       this.variant,
       this.fontStyle,
-      this.alignment,
+    this.alignment,
       this.onTap,
       this.width,
       this.margin,
@@ -111,11 +112,12 @@ class CustomButton extends StatelessWidget {
     switch (fontStyle) {
       default:
         return GoogleFonts.alike(
-            fontWeight: FontWeight.bold,
-            fontSize: getFontSize(28),
-            textStyle: Theme.of(context).textTheme.labelLarge,
-            color: ColorsConstants.whiteA700,
-            letterSpacing: 0.3);
+          fontWeight: FontWeight.bold,
+    fontSize: getFontSize(28),
+    textStyle: Theme.of(context).textTheme.labelLarge,
+          color: ColorsConstants.whiteA700,
+          letterSpacing: 0.3
+    );
     }
   }
 }

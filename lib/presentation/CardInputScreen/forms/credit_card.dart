@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:credit_card_reader/core/Navigation/routes.dart';
 import 'package:credit_card_reader/core/utils/card_number_input_formatter.dart';
 import 'package:credit_card_reader/core/utils/color_constant.dart';
@@ -15,12 +14,12 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final _formKey = GlobalKey<FormState>();
 
+final _formKey = GlobalKey<FormState>();
 class CreditCardForm extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final formStateNotifier = ref.watch(creditCardNotifierProvider);
+final formStateNotifier = ref.watch(creditCardNotifierProvider);
     return Center(
       child: Container(
         margin: getMargin(all: 20),
@@ -38,21 +37,20 @@ class CreditCardForm extends HookConsumerWidget {
                   child: Text(
                     'Add New Card',
                     style: GoogleFonts.asap(
-                        fontSize: getFontSize(30),
-                        textStyle: Theme.of(context).textTheme.titleLarge,
-                        color: ColorsConstants.black900,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5),
+                      fontSize: getFontSize(30),
+                      textStyle: Theme.of(context).textTheme.titleLarge,
+                      color: ColorsConstants.black900,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5
+                    ),
                   ),
                 ),
-                SizedBox(height: getVerticalSize(10)),
-                Row(
+              SizedBox(height: getVerticalSize(10)),
+              Row(
                   children: [
                     Expanded(
                         child: CustomTextField(
-                      onChanged: (v) => ref
-                          .read(creditCardNotifierProvider.notifier)
-                          .setCardNumber(v),
+                          onChanged: (v)=>ref.read(creditCardNotifierProvider.notifier).setCardNumber(v),
                       inputType: TextInputType.number,
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
@@ -60,17 +58,14 @@ class CreditCardForm extends HookConsumerWidget {
                         CardNumberSpacesFormat()
                       ],
                       hintText: 'Card Number',
-                      onSaved: (value) => ref
-                          .read(creditCardNotifierProvider.notifier)
-                          .setCardNumber(value),
+                      onSaved: (value)=>ref.read(creditCardNotifierProvider.notifier).setCardNumber(value),
                       height: 100,
                       width: MediaQuery.of(context).size.width,
                       suffixIcon: Padding(
                         padding: getPadding(left: 10, right: 10),
-                        child: CommonImageView(
-                            svgPath: formStateNotifier.cardType.iconPath),
+                        child: CommonImageView(svgPath:formStateNotifier.cardType.iconPath),
                       ),
-                      validator: (input) => ValidateCard.validateCardNum(input),
+                          validator: (input)=>ValidateCard.validateCardNum(input),
                     )),
                   ],
                 ),
@@ -78,11 +73,8 @@ class CreditCardForm extends HookConsumerWidget {
                   children: [
                     Expanded(
                         child: CustomTextField(
-                            onSaved: (value) => ref
-                                .read(creditCardNotifierProvider.notifier)
-                                .setNameOnCard(value),
-                            validator: (value) =>
-                                ValidateCard.validateName(value),
+                            onSaved: (value)=>ref.read(creditCardNotifierProvider.notifier).setNameOnCard(value),
+                            validator:(value)=> ValidateCard.validateName(value),
                             hintText: 'Name on Card',
                             height: 100,
                             width: MediaQuery.of(context).size.width))
@@ -92,30 +84,24 @@ class CreditCardForm extends HookConsumerWidget {
                   children: [
                     Expanded(
                         child: CustomTextField(
-                            onSaved: (value) => ref
-                                .read(creditCardNotifierProvider.notifier)
-                                .setCvv(value),
-                            validator: (value) =>
-                                ValidateCard.validateCVV(value),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              LengthLimitingTextInputFormatter(4),
-                            ],
+                            onSaved: (value)=>ref.read(creditCardNotifierProvider.notifier).setCvv(value),
+                          validator:(value)=> ValidateCard.validateCVV(value),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(4),
+                          ],
                             hintText: 'CVV',
                             height: 100,
                             width: MediaQuery.of(context).size.width / .5)),
                     Expanded(
                         child: CustomTextField(
-                            onSaved: (value) => ref
-                                .read(creditCardNotifierProvider.notifier)
-                                .setExpiryDate(value.split('/').cast<int>()),
-                            validator: (value) =>
-                                ValidateCard.validateDate(value),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              LengthLimitingTextInputFormatter(4),
-                              CardDateExpiryDateFormat()
-                            ],
+                            onSaved: (value)=>ref.read(creditCardNotifierProvider.notifier).setExpiryDate(value.split('/').cast<int>()),
+                            validator:(value)=> ValidateCard.validateDate(value),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(4),
+                             CardDateExpiryDateFormat()
+                          ],
                             hintText: 'MM/YY',
                             height: 100,
                             width: MediaQuery.of(context).size.width / .5))
@@ -127,7 +113,7 @@ class CreditCardForm extends HookConsumerWidget {
                         child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CustomButton(
-                        onTap: () => context.go(CreditCardAppRoutes.homeScreen),
+                        onTap: ()=> context.go(CreditCardAppRoutes.homeScreen),
                         text: "CANCEL",
                         buttonColor: ColorsConstants.red700,
                         height: 70,
@@ -142,27 +128,13 @@ class CreditCardForm extends HookConsumerWidget {
                         buttonColor: ColorsConstants.blue700,
                         height: 70,
                         width: MediaQuery.of(context).size.width / .5,
-                        onTap: () {
+                        onTap: (){
                           if (_formKey.currentState!.validate()) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('saving your card...')),
+                              const SnackBar(content: Text('saving your card...')),
                             );
                           }
-                          ref
-                              .read(creditCardNotifierProvider.notifier)
-                              .saveCreditCard()
-                              .whenComplete(() => AwesomeDialog(
-                                    context: context,
-                                    dialogType: DialogType.SUCCES,
-                                    animType: AnimType.TOPSLIDE,
-                                    title: 'Success',
-                                    desc: 'Card Added',
-                                    btnOkOnPress: () {
-                                      context
-                                          .go(CreditCardAppRoutes.homeScreen);
-                                    },
-                                  )..show());
+                          ref.read(creditCardNotifierProvider.notifier).saveCreditCard();
                         },
                       ),
                     ))

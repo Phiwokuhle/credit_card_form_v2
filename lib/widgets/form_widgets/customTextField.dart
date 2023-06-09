@@ -22,56 +22,57 @@ class CustomTextField extends ConsumerWidget {
 
   final FormFieldValidator<String>? validator;
 
-  const CustomTextField(
-      {Key? key,
-      this.label,
-      required this.height,
-      required this.width,
-      this.controller,
-      this.focusNode,
-      this.hintText,
-      this.errorText,
-      this.onChanged,
-      this.suffixIcon,
-      this.inputType = TextInputType.text,
-      this.validator,
-      this.onEditingComplete,
-      this.inputFormatters,
-      this.onSaved})
-      : super(key: key);
+  const CustomTextField( {
+    Key? key,
+    this.label,
+    required this.height,
+    required this.width,
+    this.controller,
+    this.focusNode,
+    this.hintText,
+    this.errorText,
+    this.onChanged,
+    this.suffixIcon,
+    this.inputType = TextInputType.text,
+    this.validator,
+    this.onEditingComplete,
+    this.inputFormatters,
+    this.onSaved
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      margin: getMargin(left: 19, right: 19),
+      margin: getMargin(left: 19,right: 19),
       height: height,
       width: width,
       child: TextFormField(
-          controller: controller,
-          focusNode: focusNode,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-            helperStyle: GoogleFonts.aladin(
+        controller: controller,
+        focusNode: focusNode,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          helperStyle: GoogleFonts.aladin(
               textStyle: Theme.of(context).textTheme.titleLarge,
               color: ColorsConstants.black900,
               fontWeight: FontWeight.bold,
-            ),
-            hintText: hintText,
-            suffixIcon: suffixIcon,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8))),
           ),
-          autocorrect: false,
-          keyboardType: inputType,
-          validator: validator,
-          onChanged: onChanged,
-          onEditingComplete: onEditingComplete,
-          inputFormatters: inputFormatters,
-          onSaved: (String? input) {
-            String value = input != null ? input.trim() : "";
-            onSaved?.call(value);
-          }),
+          hintText: hintText,
+        suffixIcon: suffixIcon,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8))),
+        ),
+        autocorrect: false,
+        keyboardType: inputType,
+        validator: validator,
+        onChanged: onChanged,
+        onEditingComplete: onEditingComplete,
+        inputFormatters: inputFormatters,
+        onSaved:(String? input){
+          String value = input != null ? input.trim() :"";
+          onSaved?.call(value);
+        }
+      ),
     );
   }
 }

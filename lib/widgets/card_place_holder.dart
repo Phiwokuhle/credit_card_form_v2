@@ -18,31 +18,29 @@ class CreditCard extends StatelessWidget {
   final Function? cardOnclick;
 
   const CreditCard({
-    this.cardNumber,
-    this.cardHolder,
-    this.expiryDate,
-    this.showEmptyCard = false,
-    this.cvv,
-    this.backgroundColor,
-    this.cardOnclick,
+     this.cardNumber,
+     this.cardHolder,
+     this.expiryDate,
+    this.showEmptyCard =false,
+    this.cvv, this.backgroundColor, this.cardOnclick,
+
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: getSize(300),
-        height: getSize(182), // Adjust width as needed
-        decoration: BoxDecoration(
-          color: backgroundColor ?? ColorsConstants.bluegray400,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        padding: EdgeInsets.all(16),
-        child: !showEmptyCard
-            ? _buildCardContentWidget()
-            : _addCardWidget(context));
+      width: getSize(300),
+      height: getSize(182),// Adjust width as needed
+      decoration: BoxDecoration(
+        color: backgroundColor ?? ColorsConstants.bluegray400,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      padding: EdgeInsets.all(16),
+      child:showEmptyCard ? _buildCardContentWidget() : _addCardWidget(context)
+    );
   }
 
-  Column _buildCardContentWidget() {
+  Column _buildCardContentWidget(){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,7 +48,7 @@ class CreditCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              cardNumber ?? "",
+              cardNumber!,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -65,7 +63,7 @@ class CreditCard extends StatelessWidget {
         ),
         SizedBox(height: 20),
         Text(
-          cardHolder ?? "",
+          cardHolder!,
           style: TextStyle(
             color: ColorsConstants.whiteA700,
             fontSize: 16,
@@ -76,14 +74,14 @@ class CreditCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              expiryDate ?? "",
+              expiryDate!,
               style: TextStyle(
                 color: ColorsConstants.whiteA700,
                 fontSize: 16,
               ),
             ),
             Text(
-              cvv ?? "",
+              cvv!,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
@@ -97,7 +95,7 @@ class CreditCard extends StatelessWidget {
 
   Widget _addCardWidget(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.go(CreditCardAppRoutes.addCardScreen),
+      onTap:() => context.go(CreditCardAppRoutes.addCardScreen),
       child: Column(
         children: [
           Icon(
@@ -105,17 +103,18 @@ class CreditCard extends StatelessWidget {
             color: ColorsConstants.whiteA700,
             size: getSize(80),
           ),
-          Text(
-            "add new card",
+          Text("add new card",
             style: GoogleFonts.alike(
                 fontSize: getFontSize(20),
                 textStyle: Theme.of(context).textTheme.bodyMedium,
                 color: ColorsConstants.whiteA700,
                 fontWeight: FontWeight.bold,
-                letterSpacing: 0.5),
+                letterSpacing: 0.5
+            ),
           )
         ],
       ),
     );
   }
+
 }

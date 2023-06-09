@@ -58,7 +58,7 @@ class CommonImageView extends StatelessWidget {
         fit: fit,
         color: color,
       );
-    } else if (imagePath != null && imagePath!.isNotEmpty) {
+    }else if (imagePath != null && imagePath!.isNotEmpty) {
       return Image.asset(
         imagePath!,
         height: height,
