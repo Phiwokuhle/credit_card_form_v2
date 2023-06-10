@@ -14,14 +14,21 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+CreditCardState _$CreditCardStateFromJson(Map<String, dynamic> json) {
+  return _CreditCardState.fromJson(json);
+}
+
 /// @nodoc
 mixin _$CreditCardState {
+  @Index(unique: true, replace: true)
   String? get card_number => throw _privateConstructorUsedError;
+  @enumerated
   CardType get cardType => throw _privateConstructorUsedError;
   String? get cvv => throw _privateConstructorUsedError;
   String? get ownerName => throw _privateConstructorUsedError;
-  List<int>? get expiryDate => throw _privateConstructorUsedError;
+  String? get expiryDate => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $CreditCardStateCopyWith<CreditCardState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -34,11 +41,11 @@ abstract class $CreditCardStateCopyWith<$Res> {
       _$CreditCardStateCopyWithImpl<$Res, CreditCardState>;
   @useResult
   $Res call(
-      {String? card_number,
-      CardType cardType,
+      {@Index(unique: true, replace: true) String? card_number,
+      @enumerated CardType cardType,
       String? cvv,
       String? ownerName,
-      List<int>? expiryDate});
+      String? expiryDate});
 }
 
 /// @nodoc
@@ -80,7 +87,7 @@ class _$CreditCardStateCopyWithImpl<$Res, $Val extends CreditCardState>
       expiryDate: freezed == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as String?,
     ) as $Val);
   }
 }
@@ -94,11 +101,11 @@ abstract class _$$_CreditCardStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? card_number,
-      CardType cardType,
+      {@Index(unique: true, replace: true) String? card_number,
+      @enumerated CardType cardType,
       String? cvv,
       String? ownerName,
-      List<int>? expiryDate});
+      String? expiryDate});
 }
 
 /// @nodoc
@@ -136,42 +143,41 @@ class __$$_CreditCardStateCopyWithImpl<$Res>
           : ownerName // ignore: cast_nullable_to_non_nullable
               as String?,
       expiryDate: freezed == expiryDate
-          ? _value._expiryDate
+          ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_CreditCardState implements _CreditCardState {
+@JsonSerializable()
+class _$_CreditCardState extends _CreditCardState {
   const _$_CreditCardState(
-      {this.card_number,
-      this.cardType = CardType.unknown,
+      {@Index(unique: true, replace: true) this.card_number,
+      @enumerated this.cardType = CardType.unknown,
       this.cvv,
       this.ownerName,
-      final List<int>? expiryDate})
-      : _expiryDate = expiryDate;
+      this.expiryDate})
+      : super._();
+
+  factory _$_CreditCardState.fromJson(Map<String, dynamic> json) =>
+      _$$_CreditCardStateFromJson(json);
 
   @override
+  @Index(unique: true, replace: true)
   final String? card_number;
   @override
   @JsonKey()
+  @enumerated
   final CardType cardType;
   @override
   final String? cvv;
   @override
   final String? ownerName;
-  final List<int>? _expiryDate;
   @override
-  List<int>? get expiryDate {
-    final value = _expiryDate;
-    if (value == null) return null;
-    if (_expiryDate is EqualUnmodifiableListView) return _expiryDate;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final String? expiryDate;
 
   @override
   String toString() {
@@ -190,39 +196,53 @@ class _$_CreditCardState implements _CreditCardState {
             (identical(other.cvv, cvv) || other.cvv == cvv) &&
             (identical(other.ownerName, ownerName) ||
                 other.ownerName == ownerName) &&
-            const DeepCollectionEquality()
-                .equals(other._expiryDate, _expiryDate));
+            (identical(other.expiryDate, expiryDate) ||
+                other.expiryDate == expiryDate));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, card_number, cardType, cvv,
-      ownerName, const DeepCollectionEquality().hash(_expiryDate));
+  int get hashCode => Object.hash(
+      runtimeType, card_number, cardType, cvv, ownerName, expiryDate);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_CreditCardStateCopyWith<_$_CreditCardState> get copyWith =>
       __$$_CreditCardStateCopyWithImpl<_$_CreditCardState>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CreditCardStateToJson(
+      this,
+    );
+  }
 }
 
-abstract class _CreditCardState implements CreditCardState {
+abstract class _CreditCardState extends CreditCardState {
   const factory _CreditCardState(
-      {final String? card_number,
-      final CardType cardType,
+      {@Index(unique: true, replace: true) final String? card_number,
+      @enumerated final CardType cardType,
       final String? cvv,
       final String? ownerName,
-      final List<int>? expiryDate}) = _$_CreditCardState;
+      final String? expiryDate}) = _$_CreditCardState;
+  const _CreditCardState._() : super._();
+
+  factory _CreditCardState.fromJson(Map<String, dynamic> json) =
+      _$_CreditCardState.fromJson;
 
   @override
+  @Index(unique: true, replace: true)
   String? get card_number;
   @override
+  @enumerated
   CardType get cardType;
   @override
   String? get cvv;
   @override
   String? get ownerName;
   @override
-  List<int>? get expiryDate;
+  String? get expiryDate;
   @override
   @JsonKey(ignore: true)
   _$$_CreditCardStateCopyWith<_$_CreditCardState> get copyWith =>

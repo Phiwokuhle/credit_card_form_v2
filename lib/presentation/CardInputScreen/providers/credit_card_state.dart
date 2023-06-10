@@ -1,13 +1,10 @@
 import 'package:credit_card_reader/core/constants/constants.dart';
 import 'package:credit_card_reader/core/data/credit_card.dart';
-import 'package:credit_card_reader/core/data/credit_cards.dart';
 import 'package:credit_card_reader/core/repository/local_credit_card_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isar/isar.dart';
 
 final creditCardNotifierProvider = StateNotifierProvider.autoDispose<
     CreditCardFormStateNotifier, CreditCardState>((ref) {
-  //final isar = ref.watch(isarProvider);
   return CreditCardFormStateNotifier();
 });
 
@@ -28,7 +25,7 @@ class CreditCardFormStateNotifier extends StateNotifier<CreditCardState> {
     );
   }
 
-  void setExpiryDate(List<int> date) {
+  void setExpiryDate(String date) {
     state = state.copyWith(
       expiryDate: date,
     );
@@ -47,7 +44,7 @@ class CreditCardFormStateNotifier extends StateNotifier<CreditCardState> {
         cvv: state.cvv,
         ownerName: state.ownerName,
         expiryDate: state.expiryDate);
-    _repository.saveCreditCard(CreditCardsLocalDB()..creditCard = state);
+    _repository.saveCreditCard(state);
   }
 
   void _setCardtype(String cardNumber) {

@@ -4,6 +4,7 @@ import 'package:credit_card_reader/core/utils/card_number_input_formatter.dart';
 import 'package:credit_card_reader/core/utils/color_constant.dart';
 import 'package:credit_card_reader/core/utils/size_utils.dart';
 import 'package:credit_card_reader/presentation/CardInputScreen/providers/credit_card_state.dart';
+import 'package:credit_card_reader/presentation/CardInputScreen/providers/credit_cards_notifier.dart';
 import 'package:credit_card_reader/presentation/CardInputScreen/validate.dart';
 import 'package:credit_card_reader/widgets/common_image_view.dart';
 import 'package:credit_card_reader/widgets/custom_button.dart';
@@ -60,9 +61,6 @@ class CreditCardForm extends HookConsumerWidget {
                         CardNumberSpacesFormat()
                       ],
                       hintText: 'Card Number',
-                      onSaved: (value) => ref
-                          .read(creditCardNotifierProvider.notifier)
-                          .setCardNumber(value),
                       height: 100,
                       width: MediaQuery.of(context).size.width,
                       suffixIcon: Padding(
@@ -78,7 +76,7 @@ class CreditCardForm extends HookConsumerWidget {
                   children: [
                     Expanded(
                         child: CustomTextField(
-                            onSaved: (value) => ref
+                            onChanged: (value) => ref
                                 .read(creditCardNotifierProvider.notifier)
                                 .setNameOnCard(value),
                             validator: (value) =>
@@ -92,7 +90,7 @@ class CreditCardForm extends HookConsumerWidget {
                   children: [
                     Expanded(
                         child: CustomTextField(
-                            onSaved: (value) => ref
+                            onChanged: (value) => ref
                                 .read(creditCardNotifierProvider.notifier)
                                 .setCvv(value),
                             validator: (value) =>
@@ -106,9 +104,9 @@ class CreditCardForm extends HookConsumerWidget {
                             width: MediaQuery.of(context).size.width / .5)),
                     Expanded(
                         child: CustomTextField(
-                            onSaved: (value) => ref
+                            onChanged: (value) => ref
                                 .read(creditCardNotifierProvider.notifier)
-                                .setExpiryDate(value.split('/').cast<int>()),
+                                .setExpiryDate(value),
                             validator: (value) =>
                                 ValidateCard.validateDate(value),
                             inputFormatters: [
@@ -154,6 +152,10 @@ class CreditCardForm extends HookConsumerWidget {
                                       title: 'Success',
                                       desc: 'Card Added',
                                       btnOkOnPress: () {
+                                        ref
+                                            .read(creditCardsStateNotifier
+                                                .notifier)
+                                            .loadCreditCards();
                                         context
                                             .go(CreditCardAppRoutes.homeScreen);
                                       },
