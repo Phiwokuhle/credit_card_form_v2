@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^1.0.5
   go_router: ^8.0.1
   path_provider: ^2.0.15
+  isar_flutter_libs: ^3.1.0+1
+  isar_annotation: ^0.2.0
 
 dev_dependencies:
   flutter_test:
