@@ -38,8 +38,13 @@ const CreditCardStateSchema = CollectionSchema(
       name: r'expiryDate',
       type: IsarType.string,
     ),
-    r'ownerName': PropertySchema(
+    r'issuingCountry': PropertySchema(
       id: 4,
+      name: r'issuingCountry',
+      type: IsarType.string,
+    ),
+    r'ownerName': PropertySchema(
+      id: 5,
       name: r'ownerName',
       type: IsarType.string,
     )
@@ -97,6 +102,12 @@ int _creditCardStateEstimateSize(
     }
   }
   {
+    final value = object.issuingCountry;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.ownerName;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -115,7 +126,8 @@ void _creditCardStateSerialize(
   writer.writeString(offsets[1], object.card_number);
   writer.writeString(offsets[2], object.cvv);
   writer.writeString(offsets[3], object.expiryDate);
-  writer.writeString(offsets[4], object.ownerName);
+  writer.writeString(offsets[4], object.issuingCountry);
+  writer.writeString(offsets[5], object.ownerName);
 }
 
 CreditCardState _creditCardStateDeserialize(
@@ -131,7 +143,8 @@ CreditCardState _creditCardStateDeserialize(
     card_number: reader.readStringOrNull(offsets[1]),
     cvv: reader.readStringOrNull(offsets[2]),
     expiryDate: reader.readStringOrNull(offsets[3]),
-    ownerName: reader.readStringOrNull(offsets[4]),
+    issuingCountry: reader.readStringOrNull(offsets[4]),
+    ownerName: reader.readStringOrNull(offsets[5]),
   );
   return object;
 }
@@ -154,6 +167,8 @@ P _creditCardStateDeserializeProp<P>(
     case 3:
       return (reader.readStringOrNull(offset)) as P;
     case 4:
+      return (reader.readStringOrNull(offset)) as P;
+    case 5:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -965,6 +980,160 @@ extension CreditCardStateQueryFilter
   }
 
   QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'issuingCountry',
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'issuingCountry',
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'issuingCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'issuingCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'issuingCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'issuingCountry',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'issuingCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'issuingCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'issuingCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'issuingCountry',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'issuingCountry',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
+      issuingCountryIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'issuingCountry',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterFilterCondition>
       ownerNameIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1182,6 +1351,20 @@ extension CreditCardStateQuerySortBy
   }
 
   QueryBuilder<CreditCardState, CreditCardState, QAfterSortBy>
+      sortByIssuingCountry() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'issuingCountry', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterSortBy>
+      sortByIssuingCountryDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'issuingCountry', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterSortBy>
       sortByOwnerName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'ownerName', Sort.asc);
@@ -1265,6 +1448,20 @@ extension CreditCardStateQuerySortThenBy
   }
 
   QueryBuilder<CreditCardState, CreditCardState, QAfterSortBy>
+      thenByIssuingCountry() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'issuingCountry', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterSortBy>
+      thenByIssuingCountryDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'issuingCountry', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QAfterSortBy>
       thenByOwnerName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'ownerName', Sort.asc);
@@ -1306,6 +1503,14 @@ extension CreditCardStateQueryWhereDistinct
       distinctByExpiryDate({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'expiryDate', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<CreditCardState, CreditCardState, QDistinct>
+      distinctByIssuingCountry({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'issuingCountry',
+          caseSensitive: caseSensitive);
     });
   }
 
@@ -1351,6 +1556,13 @@ extension CreditCardStateQueryProperty
     });
   }
 
+  QueryBuilder<CreditCardState, String?, QQueryOperations>
+      issuingCountryProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'issuingCountry');
+    });
+  }
+
   QueryBuilder<CreditCardState, String?, QQueryOperations> ownerNameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'ownerName');
@@ -1370,6 +1582,7 @@ _$_CreditCardState _$$_CreditCardStateFromJson(Map<String, dynamic> json) =>
       cvv: json['cvv'] as String?,
       ownerName: json['ownerName'] as String?,
       expiryDate: json['expiryDate'] as String?,
+      issuingCountry: json['issuingCountry'] as String?,
     );
 
 Map<String, dynamic> _$$_CreditCardStateToJson(_$_CreditCardState instance) =>
@@ -1379,6 +1592,7 @@ Map<String, dynamic> _$$_CreditCardStateToJson(_$_CreditCardState instance) =>
       'cvv': instance.cvv,
       'ownerName': instance.ownerName,
       'expiryDate': instance.expiryDate,
+      'issuingCountry': instance.issuingCountry,
     };
 
 const _$CardTypeEnumMap = {

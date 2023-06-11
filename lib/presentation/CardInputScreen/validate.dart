@@ -25,6 +25,13 @@ class ValidateCard {
     return null;
   }
 
+  static String? validateIssuingCountry(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Please select issuing country";
+    }
+    return null;
+  }
+
   static String? validateName(String? input) {
     input = input?.trim();
 

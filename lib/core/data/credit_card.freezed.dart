@@ -27,6 +27,7 @@ mixin _$CreditCardState {
   String? get cvv => throw _privateConstructorUsedError;
   String? get ownerName => throw _privateConstructorUsedError;
   String? get expiryDate => throw _privateConstructorUsedError;
+  String? get issuingCountry => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $CreditCardStateCopyWith<$Res> {
       @enumerated CardType cardType,
       String? cvv,
       String? ownerName,
-      String? expiryDate});
+      String? expiryDate,
+      String? issuingCountry});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$CreditCardStateCopyWithImpl<$Res, $Val extends CreditCardState>
     Object? cvv = freezed,
     Object? ownerName = freezed,
     Object? expiryDate = freezed,
+    Object? issuingCountry = freezed,
   }) {
     return _then(_value.copyWith(
       card_number: freezed == card_number
@@ -88,6 +91,10 @@ class _$CreditCardStateCopyWithImpl<$Res, $Val extends CreditCardState>
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
               as String?,
+      issuingCountry: freezed == issuingCountry
+          ? _value.issuingCountry
+          : issuingCountry // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -105,7 +112,8 @@ abstract class _$$_CreditCardStateCopyWith<$Res>
       @enumerated CardType cardType,
       String? cvv,
       String? ownerName,
-      String? expiryDate});
+      String? expiryDate,
+      String? issuingCountry});
 }
 
 /// @nodoc
@@ -124,6 +132,7 @@ class __$$_CreditCardStateCopyWithImpl<$Res>
     Object? cvv = freezed,
     Object? ownerName = freezed,
     Object? expiryDate = freezed,
+    Object? issuingCountry = freezed,
   }) {
     return _then(_$_CreditCardState(
       card_number: freezed == card_number
@@ -146,6 +155,10 @@ class __$$_CreditCardStateCopyWithImpl<$Res>
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
               as String?,
+      issuingCountry: freezed == issuingCountry
+          ? _value.issuingCountry
+          : issuingCountry // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -159,7 +172,8 @@ class _$_CreditCardState extends _CreditCardState {
       @enumerated this.cardType = CardType.unknown,
       this.cvv,
       this.ownerName,
-      this.expiryDate})
+      this.expiryDate,
+      this.issuingCountry})
       : super._();
 
   factory _$_CreditCardState.fromJson(Map<String, dynamic> json) =>
@@ -178,10 +192,12 @@ class _$_CreditCardState extends _CreditCardState {
   final String? ownerName;
   @override
   final String? expiryDate;
+  @override
+  final String? issuingCountry;
 
   @override
   String toString() {
-    return 'CreditCardState(card_number: $card_number, cardType: $cardType, cvv: $cvv, ownerName: $ownerName, expiryDate: $expiryDate)';
+    return 'CreditCardState(card_number: $card_number, cardType: $cardType, cvv: $cvv, ownerName: $ownerName, expiryDate: $expiryDate, issuingCountry: $issuingCountry)';
   }
 
   @override
@@ -197,13 +213,15 @@ class _$_CreditCardState extends _CreditCardState {
             (identical(other.ownerName, ownerName) ||
                 other.ownerName == ownerName) &&
             (identical(other.expiryDate, expiryDate) ||
-                other.expiryDate == expiryDate));
+                other.expiryDate == expiryDate) &&
+            (identical(other.issuingCountry, issuingCountry) ||
+                other.issuingCountry == issuingCountry));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, card_number, cardType, cvv, ownerName, expiryDate);
+  int get hashCode => Object.hash(runtimeType, card_number, cardType, cvv,
+      ownerName, expiryDate, issuingCountry);
 
   @JsonKey(ignore: true)
   @override
@@ -225,7 +243,8 @@ abstract class _CreditCardState extends CreditCardState {
       @enumerated final CardType cardType,
       final String? cvv,
       final String? ownerName,
-      final String? expiryDate}) = _$_CreditCardState;
+      final String? expiryDate,
+      final String? issuingCountry}) = _$_CreditCardState;
   const _CreditCardState._() : super._();
 
   factory _CreditCardState.fromJson(Map<String, dynamic> json) =
@@ -243,6 +262,8 @@ abstract class _CreditCardState extends CreditCardState {
   String? get ownerName;
   @override
   String? get expiryDate;
+  @override
+  String? get issuingCountry;
   @override
   @JsonKey(ignore: true)
   _$$_CreditCardStateCopyWith<_$_CreditCardState> get copyWith =>

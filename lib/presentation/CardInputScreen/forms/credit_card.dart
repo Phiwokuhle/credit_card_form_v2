@@ -8,6 +8,7 @@ import 'package:credit_card_reader/presentation/CardInputScreen/providers/credit
 import 'package:credit_card_reader/presentation/CardInputScreen/validate.dart';
 import 'package:credit_card_reader/widgets/common_image_view.dart';
 import 'package:credit_card_reader/widgets/custom_button.dart';
+import 'package:credit_card_reader/widgets/form_widgets/country_selector.dart';
 import 'package:credit_card_reader/widgets/form_widgets/customTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -119,6 +120,7 @@ class CreditCardForm extends HookConsumerWidget {
                             width: MediaQuery.of(context).size.width / .5))
                   ],
                 ),
+                CountrySelectorWidget(),
                 Row(
                   children: [
                     Expanded(

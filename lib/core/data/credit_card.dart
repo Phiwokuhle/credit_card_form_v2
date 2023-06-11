@@ -17,6 +17,7 @@ class CreditCardState with _$CreditCardState {
     String? cvv,
     String? ownerName,
     String? expiryDate,
+    String? issuingCountry,
   }) = _CreditCardState;
   final Id id = Isar.autoIncrement;
 

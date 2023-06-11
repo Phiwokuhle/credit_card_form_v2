@@ -33,6 +33,13 @@ List<CreditCardState> dummyCreditCards = [
   ),
 ];
 
+///https://www.iban.com/country-codes
+///It takes a list of country code(iso2)
+List<String> bannedCountries = [
+  'DZ', //removes Algeria from the list
+  'AO' //removes Algeria from the list
+];
+
 final mockCreditCardStateNotifierProvider =
     StateNotifierProvider<CreditCardStateNotifier, List<CreditCardState>>(
   (ref) => CreditCardStateNotifier(),
