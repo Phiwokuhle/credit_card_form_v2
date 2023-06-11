@@ -10,22 +10,24 @@ class HomeScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final Random random = Random();
-    final List<CreditCardState> cardsList =
-        ref.watch(creditCardsStateNotifier.notifier).state;
+    final _creditCardsStateNotifier =
+        ref.watch(creditCardsStateNotifier.notifier);
     return Scaffold(
         appBar: AppBar(
           title: Center(child: Text('Phiwo Vimbayo')),
         ),
         body: Center(
-            child: cardsList.isEmpty
+            child: _creditCardsStateNotifier.state.isEmpty
                 ? CreditCard(showEmptyCard: true)
                 : Container(
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: cardsList.length,
+                        itemCount: _creditCardsStateNotifier.state.length,
                         itemBuilder: (context, index) {
-                          if (index != cardsList.length - 1) {
-                            final creditCard = cardsList[index];
+                          if (index !=
+                              _creditCardsStateNotifier.state.length - 1) {
+                            final creditCard =
+                                _creditCardsStateNotifier.state[index];
                             return CreditCard(
                               cardNumber: creditCard.card_number ?? '',
                               cardHolder: creditCard.ownerName ?? '',
