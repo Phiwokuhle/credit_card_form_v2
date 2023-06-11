@@ -1,13 +1,13 @@
 import 'package:credit_card_reader/core/data/credit_card.dart';
-import 'package:credit_card_reader/core/data/mock_cards.dart';
+import 'package:credit_card_reader/core/data/mock_data.dart';
 import 'package:credit_card_reader/core/repository/local_credit_card_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CreditCardStateNotifier extends StateNotifier<List<CreditCardState>> {
+class CreditCardListStateNotifier extends StateNotifier<List<CreditCardState>> {
   final LocalCreditCardRepository _repository = LocalCreditCardRepository();
   final StateNotifierProviderRef<Object?, Object?> ref;
 
-  CreditCardStateNotifier(this.ref) : super([]) {
+  CreditCardListStateNotifier(this.ref) : super([]) {
     loadCreditCards();
   }
 
@@ -22,5 +22,5 @@ class CreditCardStateNotifier extends StateNotifier<List<CreditCardState>> {
 }
 
 final creditCardsStateNotifier = StateNotifierProvider((ref) {
-  return CreditCardStateNotifier(ref);
+  return CreditCardListStateNotifier(ref);
 });

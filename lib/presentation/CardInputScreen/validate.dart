@@ -19,8 +19,15 @@ class ValidateCard {
       return "This field is required";
     }
     input = getCleanedNumber(input);
-    if (input.length < 19) {
+    if (input.length < 16) {
       return "Please enter a valid card number ";
+    }
+    return null;
+  }
+
+  static String? validateIssuingCountry(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Please select issuing country";
     }
     return null;
   }

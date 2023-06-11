@@ -37,6 +37,12 @@ class CreditCardFormStateNotifier extends StateNotifier<CreditCardState> {
     );
   }
 
+  void setIssuingCountry(String issuingCountry) {
+    state = state.copyWith(
+      issuingCountry: issuingCountry,
+    );
+  }
+
   Future<void> saveCreditCard() async {
     state = state.copyWith(
         card_number: state.card_number,
