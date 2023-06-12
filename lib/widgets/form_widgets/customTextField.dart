@@ -20,7 +20,6 @@ class CustomTextField extends ConsumerWidget {
   final Function(String)? onChanged;
   final Function(String)? onSaved;
   final bool isReadOnly;
-
   final FormFieldValidator<String>? validator;
 
   const CustomTextField(
@@ -44,6 +43,8 @@ class CustomTextField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    controller?.selection =
+        TextSelection.collapsed(offset: controller!.text.length);
     return Container(
       margin: getMargin(left: 19, right: 19),
       height: height,

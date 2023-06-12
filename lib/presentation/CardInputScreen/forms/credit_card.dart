@@ -2,7 +2,9 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:credit_card_reader/core/Navigation/routes.dart';
 import 'package:credit_card_reader/core/utils/card_number_input_formatter.dart';
 import 'package:credit_card_reader/core/utils/color_constant.dart';
+import 'package:credit_card_reader/core/utils/image_constant.dart';
 import 'package:credit_card_reader/core/utils/size_utils.dart';
+import 'package:credit_card_reader/presentation/CardInputScreen/providers/card_scanner_notifier.dart';
 import 'package:credit_card_reader/presentation/CardInputScreen/providers/credit_card_state.dart';
 import 'package:credit_card_reader/presentation/CardInputScreen/providers/credit_cards_notifier.dart';
 import 'package:credit_card_reader/presentation/CardInputScreen/validate.dart';
@@ -20,9 +22,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final _formKey = GlobalKey<FormState>();
 
 class CreditCardForm extends HookConsumerWidget {
+  final cardNumberController = TextEditingController();
+  final nameOnCardController = TextEditingController();
+  final cvvController = TextEditingController();
+  final dateController = TextEditingController();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formStateNotifier = ref.watch(creditCardNotifierProvider);
+    cardNumberController.text = formStateNotifier.card_number ?? "";
+    nameOnCardController.text = formStateNotifier.ownerName ?? "";
+    cvvController.text = formStateNotifier.cvv ?? "";
+    dateController.text = formStateNotifier.expiryDate ?? "";
     return Center(
       child: Container(
         margin: getMargin(all: 20),
@@ -48,6 +59,37 @@ class CreditCardForm extends HookConsumerWidget {
                   ),
                 ),
                 SizedBox(height: getVerticalSize(10)),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () => ref
+                            .read(cardScannerProvider.notifier)
+                            .scanCardDetails(),
+                        child: Padding(
+                          padding: getPadding(left: 10, right: 10),
+                          child: CommonImageView(
+                              height: getSize(80),
+                              width: getSize(80),
+                              imagePath: ImageConstants.img_card_scanner),
+                        ),
+                      ),
+                      Padding(
+                        padding: getPadding(left: 10, right: 10, bottom: 18),
+                        child: Text(
+                          'click to Scan',
+                          style: GoogleFonts.asap(
+                              fontSize: getFontSize(14),
+                              textStyle: Theme.of(context).textTheme.labelLarge,
+                              color: ColorsConstants.blue700,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
                   children: [
                     Expanded(
@@ -63,6 +105,7 @@ class CreditCardForm extends HookConsumerWidget {
                       ],
                       hintText: 'Card Number',
                       height: 100,
+                      controller: cardNumberController,
                       width: MediaQuery.of(context).size.width,
                       suffixIcon: Padding(
                         padding: getPadding(left: 10, right: 10),
@@ -84,6 +127,7 @@ class CreditCardForm extends HookConsumerWidget {
                                 ValidateCard.validateName(value),
                             hintText: 'Name on Card',
                             height: 100,
+                            controller: nameOnCardController,
                             width: MediaQuery.of(context).size.width))
                   ],
                 ),
@@ -102,6 +146,7 @@ class CreditCardForm extends HookConsumerWidget {
                             ],
                             hintText: 'CVV',
                             height: 100,
+                            controller: cvvController,
                             width: MediaQuery.of(context).size.width / .5)),
                     Expanded(
                         child: CustomTextField(
@@ -117,6 +162,7 @@ class CreditCardForm extends HookConsumerWidget {
                             ],
                             hintText: 'MM/YY',
                             height: 100,
+                            controller: dateController,
                             width: MediaQuery.of(context).size.width / .5))
                   ],
                 ),

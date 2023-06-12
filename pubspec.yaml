@@ -28,6 +28,7 @@ dependencies:
   isar_flutter_libs: ^3.1.0+1
   isar_annotation: ^0.2.0
   country_picker: ^2.0.20
+  credit_card_scanner: ^1.0.5
 
 dev_dependencies:
   flutter_test:

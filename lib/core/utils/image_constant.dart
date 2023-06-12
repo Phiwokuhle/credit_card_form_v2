@@ -7,4 +7,5 @@ class ImageConstants {
 
   ///
   static const String im_card_chip = 'assets/icons/chip.png';
+  static const String img_card_scanner = 'assets/icons/card_scan.png';
 }
